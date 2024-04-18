@@ -1,3 +1,5 @@
+[Watch Demo Video](https://youtu.be/gThWBqbo4KA)
+
 ## Setup for Python
 
 1. Install Python ([Setup instructions](https://wiki.python.org/moin/BeginnersGuide))
