@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potato Disease Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .upload-box {
+            border: 2px dashed #aaa;
+            padding: 20px;
+            margin: 20px auto;
+            cursor: pointer;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+        .upload-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+        .upload-symbol {
+            font-size: 40px;
+            color: #333;
+            z-index: 2;
+        }
+        .loading {
+            display: none;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        input[type=file] {
+            display: none;
+        }
+        button {
+            background-color: #6ab04c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #4d8e37;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Potato Disease Prediction</h1>
+        <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
+            <input id="fileInput" type="file" name="file" accept="image/*" onchange="displayImage()">
+            <img id="uploadedImage" style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />
+            <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" class="loading" id="loadingGif">
+            <p class="upload-text">Drag and drop or click to upload</p>
+            <span class="upload-symbol">&#8686;</span>
+        </div>
+        <button id="predictButton" type="button" onclick="predict()">Predict</button>
+    </div>
+
+    <script>
+        function predict() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadBox = document.getElementById('uploadBox');
+            const loadingGif = document.getElementById('loadingGif');
+            const predictButton = document.getElementById('predictButton');
+
+            loadingGif.style.display = 'inline-block';
+            predictButton.disabled = true;
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingGif.style.display = 'none';
+                predictButton.disabled = false;
+
+                const resultPopup = window.open('', 'Result', 'width=400,height=200');
+                resultPopup.document.body.innerHTML = `
+                    <h2>Prediction Result:</h2>
+                    <p>Class: ${data.class}</p>
+                    <p>Confidence: ${data.confidence}</p>
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function displayImage() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadedImage = document.getElementById('uploadedImage');
+            const uploadText = document.querySelector('.upload-text');
+            const uploadSymbol = document.querySelector('.upload-symbol');
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImage.src = e.target.result;
+                uploadedImage.style.display = 'inline-block';
+                uploadText.style.display = 'none';
+                uploadSymbol.style.display = 'none';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    </script>
+</body>
+</html>
