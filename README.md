@@ -9,8 +9,6 @@ pip3 install -r training/requirements.txt
 pip3 install -r api/requirements.txt
 ```
 
-3. Install Tensorflow Serving ([Setup instructions](https://www.tensorflow.org/tfx/serving/setup))
-
 ## IDE Setup
 
 1. **Download [PyCharm](https://www.jetbrains.com/pycharm/download/?section=windows).**
@@ -22,7 +20,7 @@ pip3 install -r api/requirements.txt
 1. **Download the data from [Kaggle](https://www.kaggle.com/datasets/arjuntejaswi/plant-village).**
 2. Only keep folders related to Potatoes.
 3. Run Jupyter Notebook in your browser.
-4. Open `training/potato-disease-training.ipynb` in Jupyter Notebook.
+4. Open `training.ipynb` in Jupyter Notebook.
 5. In cell #3, update the path to the dataset.
 6. Run all the cells one by one.
 7. Copy the generated model and save it with the version number in the `models` folder.
@@ -44,6 +42,35 @@ uvicorn main:app --reload --host 0.0.0.0
 ```
 
 3. Your API is now running at `0.0.0.0:800
+
+## How to Run the Model
+
+1. **Clone the Repository:**
+   git clone https://github.com/VijayShankarSN/Potato-Disease-Prediction.git
+
+3. **Navigate to Project Directory:**
+   cd Potato-Disease-Prediction
+
+4. **Run**
+   main.py
+
+5. Open Google Chrome or any other web browser.
+
+
+6. **Access Localhost:**
+Enter the following URL in the browser address bar:
+[http://localhost:8000](http://localhost:8000)
+
+7. Click on the upload button to select and upload a potato leaf image.
+
+8. After uploading the image, click on the "Predict" button.
+
+9. A pop-up window will appear displaying the results of the prediction.
+
+10. To upload another image, click on the image in the pop-up window to reopen the upload interface.
+
+11. **Repeat Steps 6-9:** 
+ Repeat the process to predict diseases for additional images.
 
 ## Description
 
