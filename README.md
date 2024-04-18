@@ -1,3 +1,48 @@
+## Setup for Python
+
+1. Install Python ([Setup instructions](https://wiki.python.org/moin/BeginnersGuide))
+
+2. Install Python packages
+
+```
+pip3 install -r training/requirements.txt
+pip3 install -r api/requirements.txt
+```
+
+3. Install Tensorflow Serving ([Setup instructions](https://www.tensorflow.org/tfx/serving/setup))
+
+## Training the Model
+
+1. **Download the data from [Kaggle](https://www.kaggle.com/datasets/arjuntejaswi/plant-village).**
+2. Only keep folders related to Potatoes.
+3. Run Jupyter Notebook in your browser.
+4. Open `training/potato-disease-training.ipynb` in Jupyter Notebook.
+5. In cell #3, update the path to the dataset.
+6. Run all the cells one by one.
+7. Copy the generated model and save it with the version number in the `models` folder.
+
+## Running the API
+
+### Using FastAPI
+
+1. Get inside `api` folder
+
+```bash
+cd api
+```
+
+2. Run the FastAPI Server using uvicorn
+
+```bash
+uvicorn main:app --reload --host 0.0.0.0
+```
+
+3. Your API is now running at `0.0.0.0:800
+
+## Description
+
+Potato Disease Prediction
+
 Potato Disease Prediction is an innovative project aimed at revolutionizing agricultural practices by leveraging cutting-edge technology to predict and diagnose diseases in potato plants. Employing state-of-the-art machine learning techniques, this project utilizes TensorFlow, Convolutional Neural Networks (CNNs), data augmentation, and TensorFlow Dataset to accurately detect and classify various diseases affecting potato crops.
 
 **Key Features:**
@@ -36,3 +81,5 @@ The project is structured into distinct components for seamless integration and 
 **Conclusion:**
 
 Potato Disease Prediction represents a significant advancement in precision agriculture, offering farmers a reliable tool for early disease detection and mitigation. By harnessing the power of machine learning and web technologies, this project contributes to enhancing crop yield, reducing losses, and promoting sustainable farming practices. Explore the repository on GitHub to learn more and contribute to the future of agricultural innovation.
+
+Inspiration: https://cloud.google.com/blog/products/ai-machine-learning/how-to-serve-deep-learning-models-using-tensorflow-2-0-with-cloud-functions
