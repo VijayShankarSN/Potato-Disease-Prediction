@@ -11,6 +11,12 @@ pip3 install -r api/requirements.txt
 
 3. Install Tensorflow Serving ([Setup instructions](https://www.tensorflow.org/tfx/serving/setup))
 
+## IDE Setup
+
+1. **Download [PyCharm](https://www.jetbrains.com/pycharm/download/?section=windows).**
+2. Follow the installation instructions for your operating system.
+3. Open the project in PyCharm to begin development.
+
 ## Training the Model
 
 1. **Download the data from [Kaggle](https://www.kaggle.com/datasets/arjuntejaswi/plant-village).**
